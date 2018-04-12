@@ -218,7 +218,8 @@ by registering appropriate listeners, one for each news network,
 waiting for the publish event.
 ......................................................................*)
 
-let receive_report (s : string) : unit = WEvent.fire_event newswire s ;;
+let receive_report (s : string) : unit =
+  ignore (WEvent.add_listener publish (fun () -> fakeNewsNetwork s)) ;;
 
 (*......................................................................
 Exercise 10: Register the receieve_report listener to listen for the
@@ -250,4 +251,4 @@ out the headlines. You should see the headlines printed after
 the line above.
 ......................................................................*)
 
-WEvent.fire_event publish ;;
+WEvent.fire_event publish () ;;
