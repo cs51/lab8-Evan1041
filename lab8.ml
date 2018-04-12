@@ -218,9 +218,7 @@ by registering appropriate listeners, one for each news network,
 waiting for the publish event.
 ......................................................................*)
 
-let receive_report (s : string) : unit =
-  let _ = List.map (WEvent.add_listener publish) [fakeNewsNetwork; buzzFake] in
-  () ;;
+let receive_report (s : string) : unit = WEvent.fire_event newswire s ;;
 
 (*......................................................................
 Exercise 10: Register the receieve_report listener to listen for the
